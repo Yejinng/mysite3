@@ -27,7 +27,7 @@ public class UserDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			
+		conn = getConnection();
 		String sql = "update users set name = ?, password = ? , gender = ? where no = ?";
 		pstmt = conn.prepareStatement(sql);
 		

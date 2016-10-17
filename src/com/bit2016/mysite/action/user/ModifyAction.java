@@ -35,6 +35,7 @@ public class ModifyAction implements Action {
 		UserDao dao = new UserDao();
 		dao.update(vo);
 		
+
 		//session.setAttribute("authUser" , vo);
 		
 		WebUtil.redirect(request, response, "/mysite3/main");
