@@ -15,7 +15,9 @@
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
+				<a href="https://avatars1.githubusercontent.com/u/21998920?v=3&u=15ef6fed6555fb337ca6060c2f82958f65acf114&s=140">
 					<img id="profile" src="https://avatars1.githubusercontent.com/u/21998920?v=3&u=15ef6fed6555fb337ca6060c2f82958f65acf114&s=140">
+					</a>
 					<h2>안녕하세요. 박예진의  mysite에 오신 것을 환영합니다.</h2>
 					<p>
 						웹 프로그램밍 실습과제 예제 사이트<br><br><br>
