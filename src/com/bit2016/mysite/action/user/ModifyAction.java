@@ -16,29 +16,37 @@ public class ModifyAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//WebUtil.forward(request, response, "/WEB-INF/views/user/modify");
-		
+		// WebUtil.forward(request, response, "/WEB-INF/views/user/modify");
+
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		String gender = request.getParameter("gender");
-		
-		
+
 		HttpSession session = request.getSession();
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(session == null) {
+			WebUtil.redirect(request, response, "/main/");
+			return;
+		}
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+
+		if(authUser == null) {
+			WebUtil.redirect(request, response, "/main");
+			return;
+		}
 		
 		UserVo vo = new UserVo();
 		vo.setName(name);
 		vo.setPassword(password);
 		vo.setGender(gender);
 		vo.setNo(authUser.getNo());
-		
+
 		UserDao dao = new UserDao();
 		dao.update(vo);
-		
 
-		//session.setAttribute("authUser" , vo);
+		// session.setAttribute("authUser" , vo);
+
 		
-		WebUtil.redirect(request, response, "/mysite3/main");
+		WebUtil.redirect(request, response, "/user?a=modifyform&update=change");
 	}
 
 }

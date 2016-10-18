@@ -17,20 +17,20 @@ public class LogoutAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if( session == null) {
-			WebUtil.redirect(request, response, "/mysite3/main");
+			WebUtil.redirect(request, response, "/main");
 			return;
 		}
 		
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		if (authUser == null) {
-			WebUtil.redirect(request, response, "/mysite3/main");
+			WebUtil.redirect(request, response, "/main");
 			return;
 		}
 		
 		// logout 처리
 		session.removeAttribute("authUser");
 		session.invalidate();
-		WebUtil.redirect(request, response, "/mysite3/main");
+		WebUtil.redirect(request, response, "/main");
 	}
 
 }

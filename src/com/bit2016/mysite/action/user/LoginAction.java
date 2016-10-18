@@ -24,7 +24,7 @@ public class LoginAction implements Action {
 		
 		// 로그인 실패(password 또는 email 불일치)
 		if (vo == null) {
-			WebUtil.redirect(request, response, "/mysite3/user?a=loginform&result=fail");
+			WebUtil.redirect(request, response, "/user?a=loginform&result=fail");
 			return;			//주의!!! : redirect를 한후 다음 코드가 실행되지 않도록 함수 종료!!!!
 		}	
 		// 로그인 성공 -> 인증처리
@@ -34,7 +34,7 @@ public class LoginAction implements Action {
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser" , vo);
 		
-		WebUtil.redirect(request, response, "/mysite3/main");
+		WebUtil.redirect(request, response, "/main");
 		
 	}
 

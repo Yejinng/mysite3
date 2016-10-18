@@ -1,36 +1,35 @@
-package com.bit2016.mysite.action.user;
+package com.bit2016.guestbook.action;
 
 import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.bit2016.mysite.dao.UserDao;
+import com.bit2016.mysite.dao.GuestbookDao;
+import com.bit2016.mysite.vo.GuestbookVo;
 import com.bit2016.mysite.vo.UserVo;
 import com.bit2016.web.Action;
 import com.bit2016.web.util.WebUtil;
 
-public class JoinAction implements Action {
+public class AddAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		String gender = request.getParameter("gender");
+		String password = request.getParameter("pass");
+		String content = request.getParameter("content");
 		
-		UserVo vo = new UserVo();
+		GuestbookVo vo = new GuestbookVo();
 		vo.setName(name);
-		vo.setEmail(email);
 		vo.setPassword(password);
-		vo.setGender(gender);
+		vo.setContent(content);
 		
-		UserDao dao = new UserDao();
+		GuestbookDao dao = new GuestbookDao();
 		dao.insert(vo);
 		
-		WebUtil.redirect(request, response, "/user?a=joinsuccess");
+		WebUtil.redirect(request, response, "/guestbook");
 	}
 
 }

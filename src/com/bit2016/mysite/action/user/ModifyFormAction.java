@@ -18,15 +18,19 @@ public class ModifyFormAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		
+		if(session == null) {
+			WebUtil.redirect(request, response, "/main/");
+			return;
+		}
+		
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			WebUtil.redirect(request, response, "/main");
+			return;
+		}
 		
-		UserVo userVo = new UserDao().get(authUser.getNo());	//이걸 만들어줘야하는게 중요!
-//		UserVo userVo = new UserVo();
-//		userVo.setNo(10L);
-//		userVo.setName("박예진");
-//		userVo.setGender("female");
-//		userVo.setEmail("dfg@naver.com");
-		
+		UserVo userVo = new UserDao().get(authUser.getNo());	//이걸 만들어줘야하는게 중요!!
 		request.setAttribute("userVo", userVo);
 		
 		WebUtil.forward(request, response, "/WEB-INF/views/user/modifyform.jsp");
