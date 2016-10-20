@@ -55,7 +55,7 @@ public class WriteAction implements Action {
 		}
 		dao.insert(vo);
 
-		WebUtil.redirect(request, response, "/board");
+		WebUtil.redirect(request, response, "/board?a=list&write=success");
 	}
 
 }

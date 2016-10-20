@@ -29,7 +29,7 @@
 					</tr>	
 					<c:forEach items="${list }" var="vo" varStatus="status" >			
 						<tr>
-							<td>${totalCount - (currentPage - 1)*listsize - status.index }]</td>
+							<td>[${totalCount - (currentPage - 1)*listsize - status.index }]</td>
 								<c:choose>
 									<c:when test="${vo.depth >0 }">
 										<td class="left" style="padding-left:${20*vo.depth}px">
@@ -83,4 +83,9 @@
 		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>
 </body>
+<c:if test="${ param.write == 'success' }">
+<script type="text/javascript">
+	alert("글이 등록되었습니다:)");
+</script>
+</c:if>
 </html>

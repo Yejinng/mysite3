@@ -43,6 +43,7 @@ public class ModifyAction implements Action {
 		UserDao dao = new UserDao();
 		dao.update(vo);
 
+		authUser.setName(name);
 		// session.setAttribute("authUser" , vo);
 
 		

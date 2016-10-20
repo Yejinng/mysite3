@@ -35,16 +35,15 @@ public class BoardDao {
 			
 			if (vo.getGroupNo() == null) {
 				// 신규
-				String sql = "insert into board values(board_seq.nextval, ?, ?, sysdate, 0, nvl((select max(group_no)from board),0)+1,1,0 ?)";
+				String sql = "insert into board values ( board_seq.nextval, ?, ?, sysdate, 0, nvl((select max(group_no) from board), 0) + 1, 1, 0, ? )";
 				pstmt = conn.prepareStatement(sql);
-
 				pstmt.setString(1, vo.getTitle());
 				pstmt.setString(2, vo.getContent());
 				pstmt.setLong(3, vo.getUserNo());
 
 			} else {
 				// 답글
-				String sql = "insert into board values(board_seq.nextval,?,?,sysdate,0,?,?,?,?)";
+				String sql = "insert into board values (board_seq.nextval,?,?,sysdate,0,?,?,?,?)";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getTitle());
@@ -175,7 +174,7 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 
-			String sql = "select * from (select rownum as rn, no, title, hit, reg_date, name, users_no from (select a.no, a.title, a.hit, to_char(reg_date, 'yyyy-mm-dd hh:mi:ss')as reg_date, b.name, a.USERS_NO from board a, users b	where a.USERS_NO = b.NO	order by group_no desc, order_no asc)) where (?-1)*?+1 <= rn and rn <= ?*?";
+			String sql = "select no,title,hit,reg_date,depth,name,users_no from (select rownum as rn, no, title, hit, reg_date, depth, name, users_no from (select a.no, a.title, a.hit, to_char(reg_date, 'yyyy-mm-dd hh:mi:ss')as reg_date,a.depth, b.name, a.USERS_NO from board a, users b	where a.USERS_NO = b.NO	order by group_no desc, order_no asc)) where (?-1)*?+1 <= rn and rn <= ?*?";
 
 			pstmt = conn.prepareStatement(sql);
 
